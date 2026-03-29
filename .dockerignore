@@ -1,0 +1,6 @@
+node_modules/
+vyom-club/node_modules/
+server/node_modules/
+vyom-club/dist/
+.git/
+.env
