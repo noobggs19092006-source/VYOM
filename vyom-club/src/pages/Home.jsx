@@ -25,9 +25,9 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const [eventsRes, galleryRes, blogsRes] = await Promise.all([
-          axios.get((import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000') + '/api/events'),
-          axios.get((import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000') + '/api/gallery'),
-          axios.get((import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000') + '/api/blogs')
+          axios.get('/api/events'),
+          axios.get('/api/gallery'),
+          axios.get('/api/blogs')
         ]);
         setRecentEvents(eventsRes.data.slice(0, 3));
         

@@ -41,19 +41,19 @@ const AdminDashboard = () => {
   // --- Fetchers ---
   const fetchGallery = async () => {
     try {
-      const res = await axios.get((import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000') + '/api/gallery');
+      const res = await axios.get('/api/gallery');
       setGalleryItems(res.data);
     } catch (err) { console.error(err); }
   };
   const fetchEvents = async () => {
     try {
-      const res = await axios.get((import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000') + '/api/events');
+      const res = await axios.get('/api/events');
       setEventsList(res.data);
     } catch (err) { console.error(err); }
   };
   const fetchBlogs = async () => {
     try {
-      const res = await axios.get((import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000') + '/api/blogs');
+      const res = await axios.get('/api/blogs');
       setBlogsList(res.data);
     } catch (err) { console.error(err); }
   };
@@ -62,7 +62,7 @@ const AdminDashboard = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post((import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000') + '/api/admin/login', { username, password });
+      const res = await axios.post('/api/admin/login', { username, password });
       setToken(res.data.token);
       localStorage.setItem('adminToken', res.data.token);
     } catch (err) {
@@ -84,12 +84,12 @@ const AdminDashboard = () => {
     
     try {
       if (galleryEditId) {
-        await axios.put(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/api/gallery/${galleryEditId}`, formData, {
+        await axios.put(`/api/gallery/${galleryEditId}`, formData, {
           headers: { Authorization: `Bearer ${token}` }
         });
         alert('Image updated successfully!');
       } else {
-        await axios.post((import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000') + '/api/gallery', formData, {
+        await axios.post('/api/gallery', formData, {
           headers: { Authorization: `Bearer ${token}` }
         });
         alert('Image uploaded successfully!');
@@ -114,12 +114,12 @@ const AdminDashboard = () => {
 
     try {
       if (eventEditId) {
-        await axios.put(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/api/events/${eventEditId}`, formData, {
+        await axios.put(`/api/events/${eventEditId}`, formData, {
           headers: { Authorization: `Bearer ${token}` }
         });
         alert('Event updated successfully!');
       } else {
-        await axios.post((import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000') + '/api/events', formData, {
+        await axios.post('/api/events', formData, {
           headers: { Authorization: `Bearer ${token}` }
         });
         alert('Event created successfully!');
@@ -136,12 +136,12 @@ const AdminDashboard = () => {
     e.preventDefault();
     try {
       if (blogEditId) {
-        await axios.put(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/api/blogs/${blogEditId}`, {
+        await axios.put(`/api/blogs/${blogEditId}`, {
           title: blogTitle, author: blogAuthor, content: blogContent
         }, { headers: { Authorization: `Bearer ${token}` } });
         alert('Blog updated successfully!');
       } else {
-        await axios.post((import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000') + '/api/blogs', {
+        await axios.post('/api/blogs', {
           title: blogTitle, author: blogAuthor, content: blogContent
         }, { headers: { Authorization: `Bearer ${token}` } });
         alert('Blog created successfully!');
@@ -157,21 +157,21 @@ const AdminDashboard = () => {
   const handleDeleteGallery = async (id) => {
     if (!window.confirm('Delete this image?')) return;
     try {
-      await axios.delete(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/api/gallery/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.delete(`/api/gallery/${id}`, { headers: { Authorization: `Bearer ${token}` } });
       fetchGallery();
     } catch (err) { alert('Delete failed.'); }
   };
   const handleDeleteEvent = async (id) => {
     if (!window.confirm('Delete this event?')) return;
     try {
-      await axios.delete(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/api/events/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.delete(`/api/events/${id}`, { headers: { Authorization: `Bearer ${token}` } });
       fetchEvents();
     } catch (err) { alert('Delete failed.'); }
   };
   const handleDeleteBlog = async (id) => {
     if (!window.confirm('Delete this blog?')) return;
     try {
-      await axios.delete(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/api/blogs/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.delete(`/api/blogs/${id}`, { headers: { Authorization: `Bearer ${token}` } });
       fetchBlogs();
     } catch (err) { alert('Delete failed.'); }
   };

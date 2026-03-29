@@ -1,0 +1,7 @@
+{
+  "name": "vyom-club-monorepo",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "cd vyom-club && npm install && npm run build && cd ../server && npm install"
+  }
+}
